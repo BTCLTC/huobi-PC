@@ -11,28 +11,6 @@
         iview-icon(type="close", size="16")
       a(v-else, @click="$parent.onClickRefresh", id="browser-navbar__refresh", :class="tab.canRefresh ? 'enabled' : 'disabled'")
         iview-icon(type="android-refresh", size="16")
-    .input-group
-      good-custom-autocomplete#url-input(ref="input",
-                                         @keyup.shift.up.native="selectPortion",
-                                         @keyup.shift.down.native="selectPortion",
-                                         @input="onChange",
-                                         @select="onSelect",
-                                         :trigger-on-focus="false",
-                                         :placeholder="$t('navbar.placeholder')",
-                                         :fetch-suggestions="querySearch",
-                                         v-focus="focused",
-                                         :value="value",
-                                         popper-class="my-autocomplete",
-                                         :debounce="0")
-        el-button(slot="prepend")
-          div.secure(v-if="secure")
-            awesome-icon(name="lock")
-            span {{ $t('navbar.indicator.secure') }}
-          div.insecure(v-else)
-            awesome-icon(name="unlock")
-            span {{ $t('navbar.indicator.insecure') }}
-        template(slot-scope="props")
-          component(:is="'suggestion-item'", :item="props.item")
     .extensions-group(v-sortable="")
       div.block(v-for="extension in extensions",
                 :key="extension.extensionId")
@@ -56,9 +34,6 @@
           webview.extension(:ref="`webview-${extension.extensionId}`",
                             webpreferences="nativeWindowOpen=1",
                             allowpopups="")
-    .common-group
-      a(id="browser-navbar__common", @click="$parent.onCommonMenu", class="enabled")
-        iview-icon(type="android-more-vertical", size="22")
 </template>
 
 <script lang="ts">
@@ -730,36 +705,6 @@
     }
 
     mounted() {
-      if (process.env.NODE_ENV !== 'testing') {
-        // .el-input-group__prepend event(s)
-        const prepend = document.getElementsByClassName('el-input-group__prepend')[0];
-        prepend.addEventListener('click', this.showCertificate);
-
-        // .el-input__inner event(s)
-        const originalInput = document.getElementsByClassName('el-input__inner')[0];
-        let newElement = document.createElement('div');
-        newElement.id = 'security-indicator';
-        (newElement as any).classList = 'el-input__inner';
-        newElement.innerHTML = '';
-        newElement.style.display = 'none';
-        (originalInput.parentElement as any).append(newElement);
-
-        originalInput.addEventListener('click', () => {
-          this.focused = true;
-        });
-        originalInput.addEventListener('blur', () => {
-          this.focused = false;
-        });
-        this.clickHandler = () => {
-          newElement.style.display = 'none';
-          (originalInput as HTMLInputElement).style.display = 'block';
-          (originalInput as HTMLInputElement).focus();
-        };
-        this.blurHandler = () => {
-          newElement.style.display = 'block';
-          (originalInput as HTMLInputElement).style.display = 'none';
-        };
-      }
 
       const ipc = this.$electron.ipcRenderer;
 

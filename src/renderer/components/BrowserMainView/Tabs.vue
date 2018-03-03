@@ -18,14 +18,14 @@
         svg.right-edge(width="15", height="30")
           path.edge-bg(d="m14,29l0,-28l-2,0.1l-11.45,27.9l13.2,0z", stroke-linecap="null", stroke-linejoin="null", stroke-dasharray="null", stroke-width="0")
           path.edge-border(d="m1,28.5l11.1,-28l1.9,0", stroke-linejoin="round", stroke-dasharray="null", stroke-width="null", fill="none")
-      div(class="chrome-tab chrome-tab-add-btn", @click="$parent.onNewTab(windowId, 'about:newtab', false)")
-        svg.left-edge(width="15", height="30")
-          path.edge-bg(d="m14,29l0,-28l-2,0.1l-11.45,27.9l13.2,0z", stroke-linecap="null", stroke-linejoin="null", stroke-dasharray="null", stroke-width="0")
-        .chrome-tab-bg(style="padding-right: 10px;")
-        .chrome-tab-favicon
-          i.el-icon-plus
-        svg(width="15", height="30", class="right-edge")
-          path.edge-bg(d="m14,29l0,-28l-2,0.1l-11.45,27.9l13.2,0z", stroke-linecap="null", stroke-linejoin="null", stroke-dasharray="null", stroke-width="0")
+      //- div(class="chrome-tab chrome-tab-add-btn", @click="$parent.onNewTab(windowId, 'about:newtab', false)")
+      //-   svg.left-edge(width="15", height="30")
+      //-     path.edge-bg(d="m14,29l0,-28l-2,0.1l-11.45,27.9l13.2,0z", stroke-linecap="null", stroke-linejoin="null", stroke-dasharray="null", stroke-width="0")
+      //-   .chrome-tab-bg(style="padding-right: 10px;")
+      //-   .chrome-tab-favicon
+      //-     i.el-icon-plus
+      //-   svg(width="15", height="30", class="right-edge")
+      //-     path.edge-bg(d="m14,29l0,-28l-2,0.1l-11.45,27.9l13.2,0z", stroke-linecap="null", stroke-linejoin="null", stroke-dasharray="null", stroke-width="0")
     .custom-buttons(v-if="enableCustomButtons")
       svg(@click="onCustomButtonClick")
         use(:xlink:href="loadButton('minimize-window')")
@@ -207,7 +207,8 @@
       }
 
       &:last-child {
-        width: 45px;
+        // width: 45px;
+        width: 100%;
         opacity: .7;
         z-index: 0;
       }
