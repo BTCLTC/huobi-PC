@@ -2,12 +2,6 @@
 
 > huobi is a lightweight browser coded with Vue.js 2 and Electron.
 
-<p align="center">
-  <img alt="huobi" src="https://i.imgur.com/ShSujyF.jpg" width="700px">
-</p>
-
-If you like this and would like to support it. Check out my [patreon page](https://www.patreon.com/boik) :)
-And don't forget to check out my [repos](https://github.com/qazbnm456) 🐾 or say *hi* on my [Twitter](https://twitter.com/qazbnm456) as well!
 
 ## Build Setup
 
@@ -36,15 +30,3 @@ $ yarn run lint:fix
 # test electron application for production
 $ yarn run test
 ```
-
-## API support (experimental)
-
-- https://github.com/LulumiProject/lulumi-browser/issues/19
-
-## Code of Conduct
-
-Please note that this project is released with a [Contributor Code of Conduct](code-of-conduct.md). By participating in this project you agree to abide by its terms.
-
----
-
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[1c165f7](https://github.com/SimulatedGREG/electron-vue/commit/1c165f7c5e56edaf48be0fbb70838a1af26bb015) and developed by [@qazbnm456](https://github.com/qazbnm456).
