@@ -1,0 +1,13 @@
+.DS_Store
+yarn-error.log
+dist/*
+builds/*
+extensions/*
+userData/*
+test/userData/*
+coverage
+node_modules/
+npm-debug.log
+npm-debug.log.*
+thumbs.db
+!.gitkeep

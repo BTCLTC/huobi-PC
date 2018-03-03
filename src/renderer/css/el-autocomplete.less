@@ -1,0 +1,132 @@
+.el-input {
+  flex: 1;
+  display: flex;
+  -webkit-app-region: no-drag;
+  -webkit-user-select: none;
+
+  .el-input-group__prepend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    margin: 4px 0 3px;
+    padding: 0 30px;
+    background: #fff;
+    border: 1px solid #bbb;
+    border-right: 1px solid #ddd;
+
+    &:hover {
+      background: #eee;
+    }
+
+    button {
+      padding: 0 0 0 2px;
+      cursor: default;
+
+      span {
+        font-size: 14px;
+        border: 0;
+
+        div {
+          display: flex;
+          align-items: center;
+
+          svg {
+            padding: 0 3px;
+          }
+
+          &.secure {
+            color: #3c943c;
+          }
+
+          &.insecure {
+            color: #da0000;
+          }
+        }
+      }
+    }
+  }
+
+  .el-input__inner {
+    position: relative;
+    flex: 1;
+    margin: 4px 0 3px;
+    font-size: 14px;
+    color: #808080;
+    outline: 0;
+    height: auto;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #bbb;
+    border-left: none;
+    font-family: 'Source Code Pro', Courier, monospace;
+
+    .security-hint {
+      position: absolute;
+      float: left;
+      font-size: 14px;
+      padding: 6px 0;
+      white-space: nowrap;
+
+      .secure-origin {
+        color: #3c943c;
+      }
+      .insecure-origin {
+        text-decoration-line: line-through;
+        text-decoration-color: #da0000;
+        color: #da0000;
+      }
+    }
+  }
+
+  .el-input__inner {
+    &:focus, &:active, &:hover {
+      outline: 0;
+      background: #fff;
+    }
+  } 
+}
+.el-autocomplete-suggestion li {
+    list-style: none;
+    line-height: 36px;
+    padding: 0 10px;
+    margin: 0;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.my-autocomplete > .el-scrollbar {
+  .el-autocomplete-suggestion__wrap {
+    background: #324057;
+    opacity: 0.9;
+
+    ul > li {
+      line-height: normal;
+      padding: 7px;
+      text-align: left;
+
+      &:hover {
+        color: black;
+        background: #F9FAFC;
+      }
+
+      &.highlighted {
+        color: black;
+        background: #F9FAFC;
+      }
+
+      .url {
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        .name {
+          font-size: 12px;
+          color: #99A9BF;
+        }
+      }
+    }
+  }
+}
