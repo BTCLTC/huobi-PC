@@ -10,7 +10,7 @@ let url = searchParams.get('url');
 
 const websiteNotFound = {
   name: 'Server not found',
-  message: "Lulumi-browser couldn't find this website.",
+  message: "huobi couldn't find this website.",
   secondaryAction: {
     title: 'Search on archive.org',
     url: `https://web.archive.org/web/*/${url}`,
@@ -19,7 +19,7 @@ const websiteNotFound = {
 
 const sslError = {
   name: 'This website is not available',
-  message: "Lulumi-browser couldn't connect securely to this website.",
+  message: "huobi couldn't connect securely to this website.",
 };
 
 const dnsError = {
@@ -52,7 +52,7 @@ const errorCodes = {
     message: 'The connection timed out',
   },
   '-104': {
-    message: 'Lulumi-browser couldn\'t connect to the website',
+    message: 'huobi couldn\'t connect to the website',
   },
   '-105': websiteNotFound,
   '-106': offlineError,
@@ -65,15 +65,15 @@ const errorCodes = {
   '-117': sslError,
   '-200': {
     name: 'This website is not available.',
-    message: "Lulumi-browser couldn't connect securely to this website. (NET::ERR_CERT_COMMON_NAME_INVALID)",
+    message: "huobi couldn't connect securely to this website. (NET::ERR_CERT_COMMON_NAME_INVALID)",
   },
   '-201': {
     name: 'This website is not available',
-    message: "Lulumi-browser couldn't connect securely to this website. Please make sure your computer's clock is set correctly.",
+    message: "huobi couldn't connect securely to this website. Please make sure your computer's clock is set correctly.",
   },
   '-202': {
     name: 'This website is not available.',
-    message: "Lulumi-browser couldn't connect securely to this website. (NET::ERR_CERT_AUTHORITY_INVALID)",
+    message: "huobi couldn't connect securely to this website. (NET::ERR_CERT_AUTHORITY_INVALID)",
   },
   '-203': sslError,
   '-204': sslError,

@@ -44,36 +44,36 @@ export default class ExtensionService {
       }
     });
 
-    ipc.on('lulumi-browser-action-set-icon', (event, data) => {
+    ipc.on('huobi-action-set-icon', (event, data) => {
       if (vue.$electron.remote.webContents.fromId(data.webContentsId)) {
         const webContents = vue.$electron.remote.webContents.fromId(data.webContentsId);
         webContents.send(
-          'lulumi-browser-action-set-icon-result',
+          'huobi-action-set-icon-result',
           require('lulumi').browserAction.setIcon(data.extensionId, data.startPage, data.details));
       }
     });
-    ipc.on('lulumi-browser-action-set-badge-text', (event, data) => {
+    ipc.on('huobi-action-set-badge-text', (event, data) => {
       if (vue.$electron.remote.webContents.fromId(data.webContentsId)) {
         const webContents = vue.$electron.remote.webContents.fromId(data.webContentsId);
         webContents.send(
-          'lulumi-browser-action-set-badge-text-result',
+          'huobi-action-set-badge-text-result',
           require('lulumi').browserAction.setBadgeText(data.extensionId, data.details));
       }
     });
-    ipc.on('lulumi-browser-action-set-badge-background-color', (event, data) => {
+    ipc.on('huobi-action-set-badge-background-color', (event, data) => {
       if (vue.$electron.remote.webContents.fromId(data.webContentsId)) {
         const webContents = vue.$electron.remote.webContents.fromId(data.webContentsId);
         webContents.send(
-          'lulumi-browser-action-set-badge-background-color-result',
+          'huobi-action-set-badge-background-color-result',
           require('lulumi').browserAction.setBadgeBackgroundColor(data.extensionId, data.details));
       }
     });
-    ipc.on('lulumi-browser-action-add-listener-on-message', (event, data) => {
+    ipc.on('huobi-action-add-listener-on-message', (event, data) => {
       if (vue.$electron.remote.webContents.fromId(data.webContentsId)) {
         const webContents = vue.$electron.remote.webContents.fromId(data.webContentsId);
         const wrapper = function (...args) {
           webContents.send(
-            `lulumi-browser-action-add-listener-on-message-result-${data.digest}`,
+            `huobi-action-add-listener-on-message-result-${data.digest}`,
             args);
         };
         const onClickedEvent = require('lulumi').browserAction.onClicked(data.webContentsId);
@@ -82,12 +82,12 @@ export default class ExtensionService {
         }
       }
     });
-    ipc.on('lulumi-browser-action-remove-listener-on-message', (event, data) => {
+    ipc.on('huobi-action-remove-listener-on-message', (event, data) => {
       if (vue.$electron.remote.webContents.fromId(data.webContentsId)) {
         const webContents = vue.$electron.remote.webContents.fromId(data.webContentsId);
         const wrapper = function (...args) {
           webContents.send(
-            `lulumi-browser-action-add-listener-on-message-result-${data.digest}`,
+            `huobi-action-add-listener-on-message-result-${data.digest}`,
             args);
         };
         const onClickedEvent = require('lulumi').browserAction.onClicked(data.webContentsId);
@@ -96,7 +96,7 @@ export default class ExtensionService {
         }
       }
     });
-    ipc.on('lulumi-browser-action-emit-on-message', (event, data) => {
+    ipc.on('huobi-action-emit-on-message', (event, data) => {
       if (vue.$electron.remote.webContents.fromId(data.webContentsId)) {
         const onClickedEvent = require('lulumi').browserAction.onClicked(data.webContentsId);
         if (onClickedEvent) {

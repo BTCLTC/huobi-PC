@@ -685,7 +685,7 @@
             }
             if (extension.webContentsId) {
               this.$electron.remote.webContents.fromId(extension.webContentsId)
-                .send('lulumi-browser-action-clicked', { id: this.tab.id });
+                .send('huobi-action-clicked', { id: this.tab.id });
             }
           }
         }

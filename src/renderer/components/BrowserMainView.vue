@@ -1174,7 +1174,7 @@
             sub = sub.concat([
               {
                 label: this.$t('help.reportIssue') as string,
-                click: () => this.onNewTab(this.windowId, 'https://github.com/LulumiProject/lulumi-browser/issues', true),
+                click: () => this.onNewTab(this.windowId, 'https://www.huobi.com', true),
               },
               {
                 label: this.$t('help.forceReload') as string,
@@ -1499,7 +1499,7 @@
         this.windowId = 0;
 
         if (this.tabs.length === 0) {
-          this.onNewTab(this.windowId, 'https://github.com/LulumiProject/lulumi-browser', true);
+          this.onNewTab(this.windowId, 'https://www.huobi.com', true);
         }
       }
 

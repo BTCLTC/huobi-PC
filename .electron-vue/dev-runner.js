@@ -152,7 +152,7 @@ function greeting () {
   const cols = process.stdout.columns
   let text = ''
 
-  if (cols > 104) text = 'lulumi-browser'
+  if (cols > 104) text = 'huobi'
   else if (cols > 76) text = 'lulumi-|browser'
   else text = false
 
@@ -162,7 +162,7 @@ function greeting () {
       font: 'simple3d',
       space: false
     })
-  } else console.log(chalk.yellow.bold('\n  lulumi-browser'))
+  } else console.log(chalk.yellow.bold('\n  huobi'))
   console.log(chalk.blue('  getting ready...') + '\n')
 }
 

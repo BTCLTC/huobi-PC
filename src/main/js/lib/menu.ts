@@ -222,7 +222,7 @@ const getTemplate = () => {
         {
           label: i18n.t('help.reportIssue') as string,
           click: () => BrowserWindow.getFocusedWindow().webContents.send('new-tab', {
-            url: 'https://github.com/LulumiProject/lulumi-browser/issues',
+            url: 'https://www.huobi.com',
             follow: true,
           }),
         },

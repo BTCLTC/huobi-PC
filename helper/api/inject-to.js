@@ -159,24 +159,24 @@ exports.injectTo = (guestInstanceId, thisExtensionId, scriptType, context, Local
     setIcon: (details, callback) => {
       const count = ipcRenderer.sendSync('get-window-count');
       let counting = 0;
-      ipcRenderer.on('lulumi-browser-action-set-icon-result', () => {
+      ipcRenderer.on('huobi-action-set-icon-result', () => {
         counting += 1;
         if (counting === count) {
-          ipcRenderer.removeAllListeners('lulumi-browser-action-set-icon-result');
+          ipcRenderer.removeAllListeners('huobi-action-set-icon-result');
           if (callback) {
             callback();
           }
         }
       });
-      ipcRenderer.send('lulumi-browser-action-set-icon',
+      ipcRenderer.send('huobi-action-set-icon',
         thisExtensionId, lulumi.runtime.getManifest().startPage, details);
     },
     setBadgeText: (details) => {
-      ipcRenderer.send('lulumi-browser-action-set-badge-text',
+      ipcRenderer.send('huobi-action-set-badge-text',
         thisExtensionId, details);
     },
     setBadgeBackgroundColor: (details) => {
-      ipcRenderer.send('lulumi-browser-action-set-badge-background-color',
+      ipcRenderer.send('huobi-action-set-badge-background-color',
         thisExtensionId, details);
     },
     onClicked: (scriptType === 'event') ? new Event() : new IpcEvent('browser-action', 'on-clicked'),
@@ -753,7 +753,7 @@ exports.injectTo = (guestInstanceId, thisExtensionId, scriptType, context, Local
             checked: menuItem.checked,
           };
           lulumi.tabs.get(tabId, tab => onclick(info, tab));
-          
+
           if (scriptType === 'event') {
             lulumi.tabs.get(tabId, tab => lulumi.contextMenus.onClicked.emit(info, tab));
           }

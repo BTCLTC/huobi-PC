@@ -50,7 +50,7 @@ const searchEngine = [
   },
 ];
 
-const homepage = 'https://github.com/LulumiProject/lulumi-browser';
+const homepage = 'https://www.huobi.com';
 const pdfViewer = 'pdf-viewer';
 
 const tabConfig: Lulumi.Store.TabConfig = {
@@ -62,7 +62,7 @@ const tabConfig: Lulumi.Store.TabConfig = {
     highlighted: false,
     active: false,
     pinned: false,
-    url: 'https://github.com/LulumiProject/lulumi-browser',
+    url: 'https://www.huobi.com',
     title: null,
     favIconUrl: null,
     status: null,

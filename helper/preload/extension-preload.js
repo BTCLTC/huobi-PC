@@ -45,7 +45,7 @@ process.once('loaded', () => {
       responseScriptType,
       webContentsId);
   });
-  ipcRenderer.on('lulumi-browser-action-clicked', (event, tab) => {
+  ipcRenderer.on('huobi-action-clicked', (event, tab) => {
     global.lulumi.tabs.get(tab.id, tab => global.lulumi.browserAction.onClicked.emit(tab));
   });
   ipcRenderer.on('lulumi-page-action-clicked', (event, tab) => {

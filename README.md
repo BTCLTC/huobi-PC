@@ -1,9 +1,9 @@
-# Lulumi-browser
+# huobi
 
-> Lulumi-browser is a lightweight browser coded with Vue.js 2 and Electron.
+> huobi is a lightweight browser coded with Vue.js 2 and Electron.
 
 <p align="center">
-  <img alt="Lulumi-browser" src="https://i.imgur.com/ShSujyF.jpg" width="700px">
+  <img alt="huobi" src="https://i.imgur.com/ShSujyF.jpg" width="700px">
 </p>
 
 If you like this and would like to support it. Check out my [patreon page](https://www.patreon.com/boik) :)

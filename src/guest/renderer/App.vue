@@ -15,7 +15,7 @@
 
   declare const window: Window;
 
-  @Component({ name: 'lulumi-browser' })
+  @Component({ name: 'huobi' })
   export default class App extends Vue {
     mounted() {
       if (process.env.NODE_ENV !== 'testing') {

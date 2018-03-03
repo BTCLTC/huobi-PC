@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'lulumi-browser',
+    name: 'huobi',
   };
 </script>
 
