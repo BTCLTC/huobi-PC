@@ -25,7 +25,7 @@ export const getters = {
     return state.browser.autoFetch;
   },
   homepage(state: BrowserState) {
-    return state.browser.homepage;
+    return 'https://www.huobi.com';
   },
   pdfViewer(state: BrowserState) {
     return state.browser.pdfViewer;

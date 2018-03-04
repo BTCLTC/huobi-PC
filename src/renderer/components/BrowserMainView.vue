@@ -99,7 +99,7 @@
       return this.$store.getters.tabsOrder[this.windowId];
     }
     get homepage(): string {
-      return this.$store.getters.homepage;
+      return 'https://www.huobi.com';
     }
     get pdfViewer(): string {
       return this.$store.getters.pdfViewer;
@@ -730,7 +730,7 @@
         = this.$electron.remote.webContents.fromId(webContentsId);
       if (webContents && webContents.hostWebContents.id === this.windowWebContentsId) {
         webContents.send('guest-here-your-data', {
-          homepage: this.$store.getters.homepage,
+          homepage: 'https://www.huobi.com',
         });
       }
     }
@@ -848,7 +848,7 @@
     }
     // navHandlers
     onClickHome(): void {
-      this.getTab().navigateTo(this.homepage);
+      this.getTab().navigateTo('https://www.huobi.com');
     }
     onClickBack(): void {
       if (this.getTabObject().error) {
@@ -933,7 +933,7 @@
         menu.append(new MenuItem({
           label: this.$t('tabs.contextMenu.newTab') as string,
           accelerator: 'CmdOrCtrl+T',
-          click: () => this.onNewTab(this.windowId, 'about:newtab', false),
+          click: () => this.onNewTab(this.windowId, 'https://www.huobi.com', false),
         }));
         menu.append(new MenuItem({
           label: this.$t('tabs.contextMenu.duplicateTab') as string,
@@ -1108,7 +1108,7 @@
             menu.append(new MenuItem({
               label: this.$t('file.newTab') as string,
               accelerator: 'CmdOrCtrl+T',
-              click: () => this.onNewTab(this.windowId, 'about:newtab', false),
+              click: () => this.onNewTab(this.windowId, 'https://www.huobi.com', false),
             }));
             menu.append(new MenuItem({
               label: this.$t('file.newWindow') as string,
@@ -1490,7 +1490,7 @@
         ipc.once(`new-tab-suggestion-for-window-${this.windowId}`,
           (event: Electron.Event, suggestion: Lulumi.Main.BrowserWindowSuggestionItem | null) => {
           if (suggestion !== null && this.tabs.length === 0) {
-            this.onNewTab(this.windowId, suggestion.url, suggestion.follow);
+            this.onNewTab(this.windowId, 'https://www.huobi.com', suggestion.follow);
           }
         });
         // we have to call ipc.send anyway in order to cancel/trigger the corresponding event listener
@@ -1539,7 +1539,7 @@
         if (payload) {
           this.onNewTab(this.windowId, payload.url, payload.follow);
         } else {
-          this.onNewTab(this.windowId, 'about:newtab', false);
+          this.onNewTab(this.windowId, 'https://www.huobi.com', false);
         }
       });
       ipc.on('tab-close', () => {
