@@ -36,4 +36,5 @@ $ yarn run test
 ```
 ---
 
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[1c165f7](https://github.com/SimulatedGREG/electron-vue/commit/1c165f7c5e56edaf48be0fbb70838a1af26bb015) and developed by [@qazbnm456](https://github.com/qazbnm456).
+打包构建后的应用程序（运行huobi.exe）：
+[点击下载](https://github.com/yunweb/huobi-PC/build/huobi-win32-x64.zip)
