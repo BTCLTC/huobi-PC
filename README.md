@@ -37,4 +37,4 @@ $ yarn run test
 ---
 
 打包构建后的应用程序（运行huobi.exe）：
-[点击下载](https://github.com/yunweb/huobi-PC/build/huobi-win32-x64.zip)
+<a href="https://github.com/yunweb/huobi-PC/blob/master/build/huobi-win32-x64.zip" target="_blank">点击下载</a>
