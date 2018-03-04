@@ -18,14 +18,14 @@
         svg.right-edge(width="15", height="30")
           path.edge-bg(d="m14,29l0,-28l-2,0.1l-11.45,27.9l13.2,0z", stroke-linecap="null", stroke-linejoin="null", stroke-dasharray="null", stroke-width="0")
           path.edge-border(d="m1,28.5l11.1,-28l1.9,0", stroke-linejoin="round", stroke-dasharray="null", stroke-width="null", fill="none")
-      //- div(class="chrome-tab chrome-tab-add-btn", @click="$parent.onNewTab(windowId, 'about:newtab', false)")
-      //-   svg.left-edge(width="15", height="30")
-      //-     path.edge-bg(d="m14,29l0,-28l-2,0.1l-11.45,27.9l13.2,0z", stroke-linecap="null", stroke-linejoin="null", stroke-dasharray="null", stroke-width="0")
-      //-   .chrome-tab-bg(style="padding-right: 10px;")
-      //-   .chrome-tab-favicon
-      //-     i.el-icon-plus
-      //-   svg(width="15", height="30", class="right-edge")
-      //-     path.edge-bg(d="m14,29l0,-28l-2,0.1l-11.45,27.9l13.2,0z", stroke-linecap="null", stroke-linejoin="null", stroke-dasharray="null", stroke-width="0")
+      div(class="chrome-tab chrome-tab-add-btn", @click="$parent.onNewTab(windowId, 'https://www.huobi.com', true)")
+        svg.left-edge(width="15", height="30")
+          path.edge-bg(d="m14,29l0,-28l-2,0.1l-11.45,27.9l13.2,0z", stroke-linecap="null", stroke-linejoin="null", stroke-dasharray="null", stroke-width="0")
+        .chrome-tab-bg(style="padding-right: 10px;")
+        .chrome-tab-favicon
+          i.el-icon-plus
+        svg(width="15", height="30", class="right-edge")
+          path.edge-bg(d="m14,29l0,-28l-2,0.1l-11.45,27.9l13.2,0z", stroke-linecap="null", stroke-linejoin="null", stroke-dasharray="null", stroke-width="0")
     .custom-buttons(v-if="enableCustomButtons")
       svg(@click="onCustomButtonClick")
         use(:xlink:href="loadButton('minimize-window')")
@@ -115,6 +115,7 @@
         = this.$electron.remote.BrowserWindow.fromId(this.windowId);
       if (currentWindow) {
         this.$nextTick(() => {
+          if (!event.target.firstElementChild) return
           const pattern: string = event.target.firstElementChild.getAttribute('xlink:href');
           const state: string = pattern.split('#').reverse()[0].split('-')[0];
           if (state === 'minimize') {
@@ -207,8 +208,7 @@
       }
 
       &:last-child {
-        // width: 45px;
-        width: 100%;
+        width: 45px;
         opacity: .7;
         z-index: 0;
       }
@@ -405,9 +405,9 @@
   .custom-buttons {
     display: flex;
     width: 120px;
-    height: 20px;
     padding-right: 10px;
     justify-content: space-between;
+    align-items: center;
     -webkit-app-region: no-drag;
 
     svg {

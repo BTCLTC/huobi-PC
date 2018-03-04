@@ -245,43 +245,7 @@
     @Watch('url')
     onUrl(newUrl: string): void {
       this.showUrl(this.url, this.tab.id);
-      if ((process.env.NODE_ENV !== 'testing') && !this.focused) {
-        const currentUrl = url.parse(newUrl, true);
-        const originalInput = document.querySelector('.el-input__inner') as HTMLInputElement;
-        const newElement = document.getElementById('security-indicator');
-        if (newElement !== null) {
-          if (currentUrl.href !== undefined && (currentUrl.protocol === 'https:' || currentUrl.protocol === 'wss:')) {
-            const hint = this.secure ? 'secure' : 'insecure';
-            const newUrl
-              = `<div class="security-hint"><span class="${hint}-origin">${currentUrl.protocol}</span>${currentUrl.href.substr(currentUrl.protocol.length)}</div>`;
-            originalInput.style.display = 'none';
-
-            newElement.innerHTML = newUrl;
-            newElement.style.display = 'block';
-
-            newElement.removeEventListener('click', this.clickHandler, false);
-            originalInput.removeEventListener('blur', this.blurHandler, false);
-            newElement.addEventListener('click', this.clickHandler);
-            originalInput.addEventListener('blur', this.blurHandler);
-          } else {
-            newElement.style.display = 'none';
-            originalInput.style.display = 'block';
-
-            newElement.removeEventListener('click', this.clickHandler, false);
-            originalInput.removeEventListener('blur', this.blurHandler, false);
-          }
-        }
-      }
-      (this.$refs.input as any).suggestions.length = 0;
-    }
-    @Watch('focused')
-    onFocused(isFocus: boolean): void {
-      setTimeout(() => {
-        if (!isFocus) {
-          (document.querySelector('.my-autocomplete') as HTMLDivElement)
-            .style.display = 'none';
-        }
-      }, 150);
+      // (this.$refs.input as any).suggestions.length = 0;
     }
 
     updateSecure(url: string): void {
@@ -660,7 +624,7 @@
             }
             if (extension.webContentsId) {
               this.$electron.remote.webContents.fromId(extension.webContentsId)
-                .send('huobi-action-clicked', { id: this.tab.id });
+                .send('lulumi-browser-action-clicked', { id: this.tab.id });
             }
           }
         }
