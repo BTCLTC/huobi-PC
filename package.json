@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "build": {
-    "productName": "electron-browser",
+    "productName": "火币桌面客户端",
     "appId": "com.electron-browser.app",
     "directories": {
       "output": "build"

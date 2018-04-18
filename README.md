@@ -1,10 +1,5 @@
 # 火币桌面客户端
 
-**百度云下载：**
-
-链接: https://pan.baidu.com/s/1nxh2nBb 密码: 77mq
-
-
 ![火币](huobi1.png)
 
 ![火币](huobi2.png)
