@@ -53,7 +53,7 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/icon.ico"
     },
     "win": {
       "icon": "build/icons/icon.ico",

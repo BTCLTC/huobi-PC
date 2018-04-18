@@ -15,7 +15,8 @@
     }"
     >
     <div class="browser-title">
-      <img src="./assets/logo.png" alt="" class="app-icon" @click="handleShowMenu">
+      <!-- <img src="./assets/logo.png" alt="" class="app-icon" @click="handleShowMenu"> -->
+      <img src="./assets/logo.png" alt="" class="app-icon">
       <span class="app-name">{{name}}</span>
       <span class="app-title"v-if="title">&nbsp;-&nbsp;{{title}}</span>
     </div>
@@ -103,9 +104,13 @@ export default {
     },
     handleClose () {
       var win = this.currentWindow()
-      if (confirm('你确定要关闭应用吗？')) {
+      this.$confirm('你确定要关闭火币客户端吗？?', '温馨提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
         win.close()
-      }
+      }).catch(() => { })
     },
     handleShowMenu () {
       this.menu.popup(this.currentWindow(), 0, 31)
