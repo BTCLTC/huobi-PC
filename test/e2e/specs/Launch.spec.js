@@ -1,16 +1,13 @@
-import test from 'ava';
+import utils from '../utils'
 
-test('has everything set up', async (t) => {
-  const app = t.context.app;
-  await app.client.waitForBrowserWindow();
+describe('Launch', function () {
+  beforeEach(utils.beforeEach)
+  afterEach(utils.afterEach)
 
-  const win = app.browserWindow;
-  expect(await app.client.getWindowCount()).to.equal(1);
-  expect(await win.isMinimized()).to.equal(false);
-  expect(await win.isDevToolsOpened()).to.equal(false);
-  expect(await win.isVisible()).to.equal(true);
-
-  const { width, height } = await win.getBounds();
-  expect(width).to.above(0);
-  expect(height).to.above(0);
-});
+  it('shows the proper application title', function () {
+    return this.app.client.getTitle()
+      .then(title => {
+        expect(title).to.equal('vue-electron-chrome')
+      })
+  })
+})

@@ -5,14 +5,14 @@ process.env.NODE_ENV = 'production'
 const { say } = require('cfonts')
 const chalk = require('chalk')
 const del = require('del')
-const fs = require('fs')
-const packager = require('electron-packager')
+const { spawn } = require('child_process')
 const webpack = require('webpack')
 const Multispinner = require('multispinner')
 
-const buildConfig = require('./config').building
+
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
+const webConfig = require('./webpack.web.config')
 
 const doneLog = chalk.bgGreen.white(' DONE ') + ' '
 const errorLog = chalk.bgRed.white(' ERROR ') + ' '
@@ -20,38 +20,19 @@ const okayLog = chalk.bgBlue.white(' OKAY ') + ' '
 const isCI = process.env.CI || false
 
 if (process.env.BUILD_TARGET === 'clean') clean()
-else rev()
+else if (process.env.BUILD_TARGET === 'web') web()
+else build()
 
 function clean () {
-  del.sync(['builds/*', '!.gitkeep'])
+  del.sync(['build/*', '!build/icons', '!build/icons/icon.*'])
   console.log(`\n${doneLog}\n`)
   process.exit()
-}
-
-/**
- * Write rev info in production
- */
-function rev() {
-  console.log('\x1b[34mWriting rev into app(s)...\n\x1b[0m')
-  const appConfig = require('path').resolve(__dirname ,'../src/main/js/constants/config.ts')
-  fs.readFile(appConfig, 'utf8', (err, data) => {
-    if (err) {
-      console.error(err)
-    } else {
-      const result = data.replace(/lulumiRev: ['a-z0-9]*,/, `lulumiRev: '${require('git-rev-sync').long('.')}',`)
-      fs.writeFile(appConfig, result, 'utf8', (err) => {
-        if (err) {
-          console.error(err)
-        } else build()
-      });
-    }
-  })
 }
 
 function build () {
   greeting()
 
-  del.sync(['dist/*', '!.gitkeep'])
+  del.sync(['dist/electron/*', '!.gitkeep'])
 
   const tasks = ['main', 'renderer']
   const m = new Multispinner(tasks, {
@@ -64,8 +45,8 @@ function build () {
   m.on('success', () => {
     process.stdout.write('\x1B[2J\x1B[0f')
     console.log(`\n\n${results}`)
-    console.log(`${okayLog}take it away ${chalk.yellow('electron-packager')}\n`)
-    bundleApp()
+    console.log(`${okayLog}take it away ${chalk.yellow('`electron-builder`')}\n`)
+    process.exit()
   })
 
   pack(mainConfig).then(result => {
@@ -116,18 +97,18 @@ function pack (config) {
   })
 }
 
-function bundleApp () {
-  packager(buildConfig)
-    .then((appPaths) => {
-      console.log(`\n${doneLog}\n`)
-      console.log(appPaths)
+function web () {
+  del.sync(['dist/web/*', '!.gitkeep'])
+  webpack(webConfig, (err, stats) => {
+    if (err || stats.hasErrors()) console.log(err)
 
-      console.log('\n\x1b[34mDONE\n\x1b[0m')
-    })
-    .catch((err) => {
-      console.log(`\n${errorLog}${chalk.yellow('`electron-packager`')} says...\n`)
-      console.log(err + '\n')
-    });
+    console.log(stats.toString({
+      chunks: false,
+      colors: true
+    }))
+
+    process.exit()
+  })
 }
 
 function greeting () {

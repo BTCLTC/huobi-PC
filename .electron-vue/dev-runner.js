@@ -7,11 +7,10 @@ const { say } = require('cfonts')
 const { spawn } = require('child_process')
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
-const openInEditor = require('launch-editor-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const mainConfig = require('./webpack.main.config')
-const Configs = require('./webpack.renderer.config')
+const rendererConfig = require('./webpack.renderer.config')
 
 let electronProcess = null
 let manualRestart = false
@@ -41,14 +40,12 @@ function logStats (proc, data) {
 
 function startRenderer () {
   return new Promise((resolve, reject) => {
-    Configs.forEach((config) => {
-      Object.keys(config.entry).forEach(key => config.entry[key] = [path.join(__dirname, `dev-client-${key}`)].concat(config.entry[key]));
-    })
+    rendererConfig.entry.renderer = [path.join(__dirname, 'dev-client')].concat(rendererConfig.entry.renderer)
 
-    const compiler = webpack(Configs)
-    hotMiddleware = webpackHotMiddleware(compiler, {
-      log: false,
-      heartbeat: 2500
+    const compiler = webpack(rendererConfig)
+    hotMiddleware = webpackHotMiddleware(compiler, { 
+      log: false, 
+      heartbeat: 2500 
     })
 
     compiler.plugin('compilation', compilation => {
@@ -67,8 +64,7 @@ function startRenderer () {
       {
         contentBase: path.join(__dirname, '../'),
         quiet: true,
-        before(app, ctx) {
-          app.use('/__open-in-editor', openInEditor())
+        before (app, ctx) {
           app.use(hotMiddleware)
           ctx.middleware.waitUntilValid(() => {
             resolve()
@@ -83,7 +79,7 @@ function startRenderer () {
 
 function startMain () {
   return new Promise((resolve, reject) => {
-    mainConfig.entry.main = [path.join(__dirname, '../src/main/index.dev.ts')].concat(mainConfig.entry.main)
+    mainConfig.entry.main = [path.join(__dirname, '../src/main/index.dev.js')].concat(mainConfig.entry.main)
 
     const compiler = webpack(mainConfig)
 
@@ -118,7 +114,8 @@ function startMain () {
 }
 
 function startElectron () {
-  electronProcess = spawn(electron, ['--inspect=9222', path.join(__dirname, '../dist/main.js')])
+  electronProcess = spawn(electron, ['--inspect=5858', path.join(__dirname, '../dist/electron/main.js')])
+
   electronProcess.stdout.on('data', data => {
     electronLog(data, 'blue')
   })
@@ -152,8 +149,8 @@ function greeting () {
   const cols = process.stdout.columns
   let text = ''
 
-  if (cols > 104) text = 'huobi'
-  else if (cols > 76) text = 'lulumi-|browser'
+  if (cols > 104) text = 'electron-vue'
+  else if (cols > 76) text = 'electron-|vue'
   else text = false
 
   if (text) {
@@ -162,7 +159,7 @@ function greeting () {
       font: 'simple3d',
       space: false
     })
-  } else console.log(chalk.yellow.bold('\n  huobi'))
+  } else console.log(chalk.yellow.bold('\n  electron-vue'))
   console.log(chalk.blue('  getting ready...') + '\n')
 }
 

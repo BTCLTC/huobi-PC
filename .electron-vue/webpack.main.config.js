@@ -6,42 +6,17 @@ const path = require('path')
 const { dependencies } = require('../package.json')
 const webpack = require('webpack')
 
-const MinifyPlugin = require('babel-minify-webpack-plugin')
-
-let whiteListedModules = ['vue']
+const BabiliWebpackPlugin = require('babili-webpack-plugin')
 
 let mainConfig = {
   entry: {
-    main: path.join(__dirname, '../src/main/index.ts')
+    main: path.join(__dirname, '../src/main/index.js')
   },
   externals: [
-    ...Object.keys(dependencies || {}).filter(d => !whiteListedModules.includes(d))
+    ...Object.keys(dependencies || {})
   ],
   module: {
     rules: [
-      {
-        test: /\.(ts)$/,
-        enforce: 'pre',
-        exclude: /node_modules/,
-        use: {
-          loader: 'tslint-loader',
-          options: {
-            typeCheck: true,
-            tsConfigFile: './src/tsconfig.json'
-          }
-        }
-      },
-      {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'ts-loader',
-          options: {
-            appendTsSuffixTo: [/\.vue$/],
-            onlyCompileBundledFiles: true
-          }
-        }
-      },
       {
         test: /\.(js)$/,
         enforce: 'pre',
@@ -55,12 +30,7 @@ let mainConfig = {
       },
       {
         test: /\.js$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true
-          }
-        },
+        use: 'babel-loader',
         exclude: /node_modules/
       },
       {
@@ -76,21 +46,13 @@ let mainConfig = {
   output: {
     filename: '[name].js',
     libraryTarget: 'commonjs2',
-    path: path.join(__dirname, '../dist')
+    path: path.join(__dirname, '../dist/electron')
   },
   plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.MinChunkSizePlugin({
-      minChunkSize: 10000
-    })
+    new webpack.NoEmitOnErrorsPlugin()
   ],
   resolve: {
-    alias: {
-      'shared': path.join(__dirname, '../src/shared'),
-      'vue$': 'vue/dist/vue.esm.js'
-    },
-    extensions: ['.ts', '.js', '.vue', '.json']
+    extensions: ['.js', '.json', '.node']
   },
   target: 'electron-main'
 }
@@ -107,27 +69,15 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 /**
- * Adjust mainConfig for e2e testing settings
+ * Adjust mainConfig for production settings
  */
-if (process.env.TEST_ENV === 'e2e') {
+if (process.env.NODE_ENV === 'production') {
   mainConfig.plugins.push(
+    new BabiliWebpackPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
-      'process.env.TEST_ENV': '"e2e"'
+      'process.env.NODE_ENV': '"production"'
     })
   )
-} else {
-  /**
-   * Adjust mainConfig for production settings
-   */
-  if (process.env.NODE_ENV === 'production') {
-    mainConfig.plugins.push(
-      new MinifyPlugin(),
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"production"'
-      })
-    )
-  }
 }
 
 module.exports = mainConfig

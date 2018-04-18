@@ -1,40 +1,45 @@
-# huobi
+# 火币桌面客户端
 
-> huobi is a lightweight browser coded with Vue.js 2 and Electron.
+**百度云下载：**
 
-<p align="center">
-  <img alt="huobi" src="https://github.com/yunweb/huobi-PC/blob/master/docs/huobi.png" width="700px">
-</p>
+链接: https://pan.baidu.com/s/1nxh2nBb 密码: 77mq
 
 
-## Build Setup
+![火币](huobi1.png)
 
-``` bash
-# install dependencies
-$ yarn
+![火币](huobi2.png)
 
-# serve with hot reload at localhost:9080
-$ yarn run dev
+![火币](huobi3.png)
 
-# build electron application for all platforms
-$ yarn run build
 
-# build electron application for the specific target platform
-$ yarn run build:darwin # macOS
-$ yarn run build:linux  # Linux
-$ yarn run build:mas    # Mac AppStore
-$ yarn run build:win32  # Windows
 
-# lint all JS/Vue component files in `src/`
-$ yarn run lint
+## run
 
-# lint and fix
-$ yarn run lint:fix
+项目基于 [electron-vue](https://github.com/SimulatedGREG/electron-vue) 模板开发。
 
-# test electron application for production
-$ yarn run test
+
+**安装依赖：**
+
+```bat
+npm install
 ```
----
 
-打包构建后的应用程序（运行huobi.exe）：
-<a href="https://pan.baidu.com/s/1q8o93krRw-MiOdEpa5Adbg" target="_blank">百度网盘下载</a>
+**以dev方式运行：**
+
+```bat
+npm run dev
+```
+
+**打包成可执行文件：**
+
+```bat
+npm run build
+```
+
+打包需要等待几分钟，打包生成可执行文件在项目里的 `build` 文件夹下；
+
+`build/win-unpacked` 文件夹为免安装可执行文件；
+
+`build/electron-browser Setup 0.0.0.exe` 为安装文件。
+
+软件运行配置说明请看 [config.md](config.md)
