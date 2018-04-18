@@ -11,7 +11,7 @@
       <!-- <li><strong>Platform: </strong><span>{{platform}}</span></li> -->
       <li><strong>Version: </strong><span>{{version}}</span></li>
     </ul>
-    <p class="copyright">make by <a href="#" @click="open('https://www.github.com/mengdu')">@lanyue</a></p>
+    <p class="copyright">make by <a href="#" @click="open('https://www.github.com/yunweb')">@yunweb</a></p>
   </div>
 </template>
 <script>
