@@ -19,7 +19,7 @@ export default {
   },
   data () {
     return {
-      src: this.$config.APP_URL || '',
+      src: this.$config.APP_URL || 'https://www.huobipro.com',
       didLoading: false,
       isInit: true
     }

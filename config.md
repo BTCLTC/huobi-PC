@@ -17,7 +17,7 @@ return {
   // APP_NAME: 'Msmk Browser',
 
   // 应用地址
-  APP_URL: 'http://yuque.com',
+  APP_URL: 'https://www.huobipro.com',
 
   // 应用标题
   // APP_TITLE: '美思美科应用容器',

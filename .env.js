@@ -3,7 +3,7 @@ return {
   // APP_NAME: 'Msmk Browser',
 
   // 应用地址
-  APP_URL: 'https://www.huobipro.com/zh-cn/btc_usdt/exchange/',
+  APP_URL: 'https://www.huobi.com',
 
   // 应用标题
   // APP_TITLE: '火币桌面客户端',
