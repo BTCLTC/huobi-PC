@@ -56,4 +56,16 @@ return {
   //   width: 320,
   //   height: 520
   // }
+  serverList: [
+    'www.huobi.pro',
+    'api.huobi.pro',
+    'uc.huobi.pro',
+    'content.huobi.pro',
+    'www.huobi.com',
+    'www.huobipro.com',
+    'api.huobipro.com',
+    'otc.huobi.pro',
+    'otc-api.huobipro.com',
+    'otc.huobipro.com'
+  ]
 }

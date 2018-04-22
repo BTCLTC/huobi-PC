@@ -8,13 +8,16 @@ import {
 
 import envjs from 'loadenvjs'
 
+const dns = require('dns')
+const fs = require('fs')
+const os = require('os')
+
 // loading .env
 const config = envjs({mount: false})
-// console.log(config)
 process.env.APP_NAME = config.APP_NAME = config.APP_NAME || '火币桌面客户端'
 config.APP_TITLE = config.APP_TITLE || ''
 config.APP_VERSION = '1.1.0'
-config.contextmenu = typeof config.contextmenu === 'undefined' ? true : config.contextmenu
+config.contextmenu = config.contextmenu
 
 /**
  * Set `__static` path to static files in production
@@ -63,7 +66,6 @@ function createWindow () {
   mainWindow = new BrowserWindow(options)
 
   mainWindow.loadURL(winURL)
-  console.log(winURL)
 
   mainWindow.on('closed', () => {
     mainWindow = null
@@ -71,8 +73,7 @@ function createWindow () {
 }
 
 ipcMain.on('close', () => {
-  console.log('close')
-  console.log(mainWindow.isMaximized())
+
 })
 
 ipcMain.on('reload', (opts) => {
@@ -97,6 +98,7 @@ ipcMain.on('get-config', (event) => {
 
 app.on('ready', () => {
   createWindow()
+  getServerIp()
 })
 
 app.on('window-all-closed', () => {
@@ -110,6 +112,39 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+// 根据serverList获取IP地址
+function getServerIp () {
+  let hosts = []
+  config.serverList.forEach(item => {
+    dns.lookup(item, (err, ip) => {
+      if (err) throw err
+      hosts.push(`${ip}    ${item}\n`)
+      if (hosts.length === config.serverList.length) {
+        // 改写hosts文件
+        editHosts(hosts)
+      }
+    })
+  })
+}
+
+function editHosts (hosts) {
+  console.log(hosts)
+  hosts = `#     huobi   DNS  start
+ ${hosts.join('')}
+ #     huobi   DNS  end`
+  console.log(hosts)
+  const path = os.platform() === 'win32' ? 'C:/Windows/System32/drivers/etc/hosts' : '/etc/hosts'
+  fs.open(path, 'r+', function (err, data) {
+    if (err) throw err
+    console.log('同步读取: ' + data.toString())
+    if (data.toString().indexOf('huobi   DNS') < 0) {
+      fs.appendFile(path, hosts, function () {
+        console.log('追加内容完成')
+      })
+    }
+  })
+}
 
 /**
  * Auto Updater

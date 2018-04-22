@@ -21,8 +21,8 @@
     "exe": "electron-builder",
     "exe-dev": "electron dist/electron/main.js"
   },
-  "homepage": "https://www.github.com/mengdu",
-  "repository": "https://www.github.com/mengdu/electron-browser",
+  "homepage": "https://www.github.com/yunweb",
+  "repository": "https://www.github.com/yunweb/huobi-PC",
   "author": {
     "name": "liuxin",
     "email": "3358621@qq.com"
@@ -111,6 +111,7 @@
     "electron-builder": "^20.10.0",
     "electron-debug": "^1.5.0",
     "electron-devtools-installer": "^2.2.3",
+    "electron-rebuild": "^1.7.3",
     "eslint": "^4.4.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
