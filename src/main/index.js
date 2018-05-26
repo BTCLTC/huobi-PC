@@ -98,7 +98,6 @@ ipcMain.on('get-config', (event) => {
 
 app.on('ready', () => {
   createWindow()
-  getServerIp()
 })
 
 app.on('window-all-closed', () => {
@@ -112,39 +111,6 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
-// 根据serverList获取IP地址
-function getServerIp () {
-  let hosts = []
-  config.serverList.forEach(item => {
-    dns.lookup(item, (err, ip) => {
-      if (err) throw err
-      hosts.push(`${ip}    ${item}\n`)
-      if (hosts.length === config.serverList.length) {
-        // 改写hosts文件
-        editHosts(hosts)
-      }
-    })
-  })
-}
-
-function editHosts (hosts) {
-  console.log(hosts)
-  hosts = `#     huobi   DNS  start
- ${hosts.join('')}
- #     huobi   DNS  end`
-  console.log(hosts)
-  const path = os.platform() === 'win32' ? 'C:/Windows/System32/drivers/etc/hosts' : '/etc/hosts'
-  fs.open(path, 'r+', function (err, data) {
-    if (err) throw err
-    console.log('同步读取: ' + data.toString())
-    if (data.toString().indexOf('huobi   DNS') < 0) {
-      fs.appendFile(path, hosts, function () {
-        console.log('追加内容完成')
-      })
-    }
-  })
-}
 
 /**
  * Auto Updater
